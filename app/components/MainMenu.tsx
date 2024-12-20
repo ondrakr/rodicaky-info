@@ -1,4 +1,5 @@
-import { useState, useEffect, RefObject } from 'react';
+import { useState, useEffect, useCallback, RefObject } from 'react';
+import Image from 'next/image';
 
 interface MainMenuProps {
   refs: {
@@ -14,20 +15,17 @@ const MainMenu: React.FC<MainMenuProps> = ({ refs }) => {
   const [isNavbarVisible, setIsNavbarVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
 
-  // Function to handle scrolling and detect direction
-  const handleScroll = () => {
+  const handleScroll = useCallback(() => {
     const currentScrollY = window.scrollY;
 
     if (currentScrollY > lastScrollY) {
-      // Scrolling down
       setIsNavbarVisible(false);
     } else {
-      // Scrolling up
       setIsNavbarVisible(true);
     }
 
     setLastScrollY(currentScrollY);
-  };
+  }, [lastScrollY]);
 
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
@@ -35,7 +33,7 @@ const MainMenu: React.FC<MainMenuProps> = ({ refs }) => {
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, [lastScrollY]);
+  }, [handleScroll]);
 
   const scrollTo = (ref: RefObject<HTMLDivElement>) => {
     if (ref.current) {
@@ -50,9 +48,14 @@ const MainMenu: React.FC<MainMenuProps> = ({ refs }) => {
       }`}
     >
       <div className="navbar mx-auto flex justify-between items-center w-full">
-        <img src="/logo/logo_schuzky.png" alt="logo" className="h-14 w-auto" />
+        <Image
+          src="/logo/logo_schuzky.png"
+          alt="logo"
+          width={56}
+          height={56}
+          className="h-14 w-auto"
+        />
 
-        {/* Hamburger icon for small screens */}
         <button
           className="lg:hidden p-2"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -74,7 +77,6 @@ const MainMenu: React.FC<MainMenuProps> = ({ refs }) => {
           </svg>
         </button>
 
-        {/* Menu items for large screens */}
         <div className="hidden lg:flex gap-14 items-center text-modra font-medium">
           <button onClick={() => scrollTo(refs.vyhody)}>O nás</button>
           <button onClick={() => scrollTo(refs.reference)}>Reference</button>
@@ -88,7 +90,6 @@ const MainMenu: React.FC<MainMenuProps> = ({ refs }) => {
           </a>
         </div>
 
-        {/* Menu for small screens (hamburger menu) */}
         <div
           className={`lg:hidden absolute top-20 left-0 right-0 bg-white p-12 transition-all duration-300 ${
             isMenuOpen ? 'block' : 'hidden'
