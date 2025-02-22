@@ -82,12 +82,12 @@ const MainMenu: React.FC<MainMenuProps> = ({ refs }) => {
           <button onClick={() => scrollTo(refs.reference)}>Reference</button>
           <button onClick={() => scrollTo(refs.faq)}>Nejčastější dotazy</button>
           <button onClick={() => scrollTo(refs.kontakt)}>Kontakt</button>
-          <a
-            href="mailto:info@rodicaky.cz"
+          <button
+            onClick={() => scrollTo(refs.kontakt)}
             className="px-8 py-3 bg-modra text-white rounded-full flex items-center gap-4 mx-auto w-fit"
           >
-            <span className="text-md font-semibold">Napište nám!</span>
-          </a>
+            <span className="text-md font-semibold">Máme zájem!</span>
+          </button>
         </div>
 
         <div
@@ -119,12 +119,12 @@ const MainMenu: React.FC<MainMenuProps> = ({ refs }) => {
           >
             Kontakt
           </button>
-          <a
-            href="mailto:info@rodicaky.cz"
+          <button
+            onClick={() => scrollTo(refs.kontakt)}
             className="block py-3 px-8 mt-8 bg-modra text-white rounded-full text-center font-semibold"
           >
-            Napište nám!
-          </a>
+            Máme zájem!
+          </button>
         </div>
       </div>
     </div>

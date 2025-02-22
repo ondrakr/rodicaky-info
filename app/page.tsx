@@ -3,7 +3,6 @@
 
 import { useRef } from 'react';
 import MainMenu from "./components/MainMenu";
-import Info from "./components/Info";
 import Header from "./components/Header";
 import Questions from "./components/Questions";
 import Reference from "./components/Reference";
@@ -28,7 +27,7 @@ export default function Home() {
       <MainMenu refs={refs} />
       <Header />
       <div id="vyhody" ref={vyhodyRef}>
-        <Info />
+        {/* <Info /> */}
         <Questions />
       </div>
       <div id="reference" ref={referenceRef}>

@@ -12,6 +12,13 @@ export default function Info() {
   // Ref pro sledování viditelnosti elementu
   const ref = useRef<HTMLDivElement | null>(null);
 
+  // Funkce pro správné skloňování
+  const getWordForm = (count: number, forms: [string, string, string]): string => {
+    if (count === 1) return forms[0];
+    if (count >= 2 && count <= 4) return forms[1];
+    return forms[2];
+  };
+
   useEffect(() => {
     // Vytvoření observeru pro sledování viditelnosti
     const observer = new IntersectionObserver(
@@ -53,29 +60,47 @@ export default function Info() {
       };
 
       // Všechny počty začnou načítat najednou s časem 1 sekunda
-      increment(3, setSchoolCount);
-      increment(400, setTeacherCount);
-      increment(1200, setParentCount);
+      increment(1, setSchoolCount);
+      increment(30, setTeacherCount);
+      increment(300, setParentCount);
     }
   }, [inView]);
 
   return (
-    <div className="container md:w-[65%] mx-auto flex flex-col xl:flex-row gap-32 justify-between items-center mt-12 xl:mt-[-6rem]" ref={ref} id="info-component">
+    <div className="container md:w-[60%] mx-auto flex flex-col xl:flex-row gap-32 justify-between items-center mt-12 xl:mt-[-6rem]" ref={ref} id="info-component">
       {/* Textová část */}
       <div className="flex flex-col gap-8 text-modra">
         <div className="flex flex-col items-center align-center">
           <p className="text-[4rem] md:text-[5rem] font-bold">{schoolCount}</p>
-          <p className="text-lg md:text-2xl whitespace-nowrap">ZÁKLADNÍ ŠKOLY</p>
+          <p className="text-lg md:text-2xl whitespace-nowrap">
+            {getWordForm(schoolCount, [
+              "ZÁKLADNÍ ŠKOLA",
+              "ZÁKLADNÍ ŠKOLY",
+              "ZÁKLADNÍCH ŠKOL"
+            ])}
+          </p>
         </div>
 
         <div className="flex flex-col items-center">
           <p className="text-[4rem] md:text-[5rem] font-bold">{teacherCount}</p>
-          <p className="text-lg md:text-2xl whitespace-nowrap">UČITELŮ</p>
+          <p className="text-lg md:text-2xl whitespace-nowrap">
+            {getWordForm(teacherCount, [
+              "UČITEL",
+              "UČITELÉ",
+              "UČITELŮ"
+            ])}
+          </p>
         </div>
 
         <div className="flex flex-col items-center">
           <p className="text-[4rem] md:text-[5rem] font-bold">{parentCount}</p>
-          <p className="text-lg md:text-2xl whitespace-nowrap">RODIČŮ</p>
+          <p className="text-lg md:text-2xl whitespace-nowrap">
+            {getWordForm(parentCount, [
+              "RODIČ",
+              "RODIČE",
+              "RODIČŮ"
+            ])}
+          </p>
         </div>
       </div>
 
