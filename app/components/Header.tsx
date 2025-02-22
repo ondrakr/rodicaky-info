@@ -16,7 +16,7 @@ export default function Header() {
     <div className="relative bg-modra text-white">
       <div className="absolute inset-0">
         <Image
-          src="/images/header_image.jpg"
+          src="/images/header-rodicaky.jpg"
           alt="Background"
           layout="fill"
           objectFit="cover"

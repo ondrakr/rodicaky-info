@@ -25,7 +25,7 @@ export default function Contact() {
       } else {
         alert('Došlo k chybě při odesílání zprávy. Prosím zkuste to znovu.');
       }
-    } catch (error) {
+    } catch (error) { 
       alert('Došlo k chybě při odesílání zprávy. Prosím zkuste to znovu.');
     }
   };
@@ -36,7 +36,7 @@ export default function Contact() {
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{
-            backgroundImage: 'url("/images/header_image.jpg")',
+            backgroundImage: 'url("/images/footer-image.jpg")',
           }}
         >
           <div className="absolute inset-0 bg-gradient-to-b from-white to-transparent"></div>
